@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Library Web App</title>
+
+    <!-- Fullpage.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullpage.js/dist/fullpage.min.css" />
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Fullepage.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/fullpage.js/dist/fullpage.min.js"></script>
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <!-- Chart.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <!-- Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Datatables JS -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <!-- Chart.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Popper.js and Tippy.js Libraries -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <!-- Stylesheet File-->
+    <link rel="stylesheet" href="style.css" />
+    <!-- JavaScript File-->
+    <script src="script.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap Carousel -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Tooltip -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/7548843752.js" crossorigin="anonymous"></script>
+
+    
+
+</head>
+
+<body>
+
+    <div id="header">
+
+        <div class="container">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="logo">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                        style="enable-background:new 0 0 100 100; width: 70px; height: 70px;" xml:space="preserve"
+                        id="logo">
+                        <style type="text/css">
+                            .st0 {
+                                fill: #131313;
+                            }
+                        </style>
+                        <g>
+                            <g id="Logo" class="logo">
+                                <polygon class="st0" points="44.28,29.65 46.88,30.75 48.53,35.14 47.46,38.11" />
+                                <polygon class="st0" points="55.7,29.65 53.1,30.75 51.45,35.14 52.52,38.11" />
+                                <polygon class="st0" points="48.96,31.67 49.94,32.22 51.01,31.67 49.94,34.52" />
+                                <path class="st0" d="M29.46,12.85" />
+                            </g>
+                            <g>
+                                <polygon class="st0"
+                                    points="19.29,32.57 27.71,32.57 38.84,56.16 50.09,33.05 53.47,40.59 64.81,17.6 65.77,18.07 38.84,73.96 " />
+                                <polygon class="st0"
+                                    points="80.94,32.46 72.33,32.46 60.99,56.16 56.2,45.78 35.83,87.29 37.06,87.29 52.1,56.04 60.85,73.96 " />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul id="menu" class="ml-auto">
+                        <li>
+                            <a href="#home">
+                                <i class="bi bi-house"></i> Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#stats">
+                                <i class="bi bi-bar-chart-line"></i> Stats
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#inventory">
+                                <i class="bi bi-table"></i> Inventory
+                            </a>
+                        </li>
+                        <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+
+                    </ul>
+                    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+                </div>
+            </nav>
+        </div>
+
+    </div>
+
+
+
+
+    <div id="fullpage">
+
+        <div class="section">
+
+            <!-- Carousel Section -->
+            <div id="cardCarousel" class="carousel slide card-container" data-ride="carousel">
+                <h3 class="text-center">Featured Books</h3>
+                <div id="carouselContainer">
+                    <div id="search" class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search for books">
+                        <button type="button" id="searchButton">
+                            <i class="bi bi-search"></i>
+                            Search
+                        </button>
+                        <select id="genreFilter">
+                            <option value="all">All Genres</option>
+                            <option value="thriller">Thriller</option>
+                            <option value="fiction">Fiction</option>
+                            <option value="self-help">Self-help</option>
+                            <option value="romance">Romance</option>
+                            <option value="comic">Comic</option>
+                            <option value="webcomic">Webcomic</option>
+                            <option value="fantasy">Fantasy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container mb-3" id="cardContainer">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
+                                <!-- Card 1 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/a_good_girl.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">A Good Girl's Guide to Murder</h5>
+                                            <p class="card-text genre">Thriller</p>
+                                            <p class="card-text description" style="display: none;">The case is closed. Five years ago, schoolgirl Andie Bell was murdered by Sal Singh. The police know he did it. 
+                                                Everyone in town knows he did it.
+                                                <br><br>
+                                                But having grown up in the same small town that was consumed by the murder, Pippa Fitz-Amobi isn't so sure. When she chooses the case as the topic for her final year project, 
+                                                she starts to uncover secrets that someone in town desperately wants to stay hidden. 
+                                                And if the real killer is still out there, how far will they go to keep Pip from the truth?</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Holly Jackson</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 2 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/a_little_life.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">A Little Life</h5>
+                                            <p class="card-text genre">Fiction</p>
+                                            <p class="card-text description" style="display: none;">When four classmates from a small Massachusetts college move to New York to make their way, they're broke, adrift, 
+                                                and buoyed only by their friendship and ambition. There is kind, handsome Willem, an aspiring actor; JB, a quick-witted, sometimes cruel Brooklyn-born painter seeking 
+                                                entry to the art world; Malcolm, a frustrated architect at a prominent firm; and withdrawn, brilliant, enigmatic Jude, who serves as their center of gravity.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Hanya Yanagihara</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 3 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/atomic_habits.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Atomic Habits</h5>
+                                            <p class="card-text genre">Self-help</p>
+                                            <p class="card-text description" style="display: none;">No matter your goals, Atomic Habits offers a proven framework for improving—every day. James Clear, one of the 
+                                                world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors 
+                                                that lead to remarkable results.
+                                                <br><br>
+                                                If you're having trouble changing your habits, the problem isn't you. The problem is your system. Bad habits repeat themselves again and again not because you don't want to 
+                                                change, but because you have the wrong system for change. You do not rise to the level of your goals. You fall to the level of your systems. Here, you'll get a proven system 
+                                                that can take you to new heights.
+                                                </p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> James Clear</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 4 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/cant_hurt_me.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Can't Hurt Me</h5>
+                                            <p class="card-text genre">Self-help</p>
+                                            <p class="card-text description" style="display: none;">New York Times Best SellerOver 5 million copies soldFor David Goggins, childhood was a nightmare -- 
+                                                poverty, prejudice, and physical abuse colored his days and haunted his nights. But through self-discipline, mental toughness, and hard work, 
+                                                Goggins transformed himself from a depressed, overweight young man with no future into a U.S. Armed Forces icon and one of the world's top endurance athletes. 
+                                                <br><br>
+                                                The only man in history to complete elite training as a Navy SEAL, Army Ranger, and Air Force Tactical Air Controller, 
+                                                he went on to set records in numerous endurance events, inspiring Outside magazine to name him "The Fittest (Real) Man in America.
+                                                "In Can't Hurt Me, he shares his astonishing life story and reveals that most of us tap into only 40% of our capabilities. Goggins calls this The 40% Rule, 
+                                                and his story illuminates a path that anyone can follow to push past pain, demolish fear, and reach their full potential.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> David Goggins</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="container mb-3">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
+                                <!-- Card 5 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/grey.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Fifty Shades of Grey</h5>
+                                            <p class="card-text genre">Romance</p>
+                                            <p class="card-text description" style="display: none;">When literature student Anastasia Steele goes to interview young entrepreneur Christian Grey, 
+                                                she encounters a man who is beautiful, brilliant, and intimidating. The unworldly, innocent Ana is startled to realize she wants this man and, despite 
+                                                his enigmatic reserve, finds she is desperate to get close to him. Unable to resist Ana’s quiet beauty, wit, and independent spirit, Grey admits he wants her, too—but on his own terms.
+                                                <br><br>
+                                                Shocked yet thrilled by Grey’s singular erotic tastes, Ana hesitates. For all the trappings of success—his multinational businesses, 
+                                                his vast wealth, his loving family—Grey is a man tormented by demons and consumed by the need to control. When the couple embarks on a daring, 
+                                                passionately physical affair, Ana discovers Christian Grey’s secrets and explores her own dark desires.
+                                                <br><br>
+                                                Erotic, amusing, and deeply moving, the Fifty Shades Trilogy is a tale that will obsess you, possess you, and stay with you forever.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> E.L. James</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 6 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/don_quixote.jpeg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Don Quixote</h5>
+                                            <p class="card-text genre">Fiction</p>
+                                            <p class="card-text description" style="display: none;">Don Quixote has become so entranced by reading chivalric romances that he determines to become a knight-errant himself. 
+                                                In the company of his faithful squire, Sancho Panza, his exploits blossom in all sorts of wonderful ways. While Quixote's fancy often leads him astray—he tilts at windmills, 
+                                                imagining them to be giants—Sancho acquires cunning and a certain sagacity. Sane madman and wise fool, they roam the world together, and together they have haunted readers' 
+                                                imaginations for nearly four hundred years.
+                                                <br><br>
+                                                With its experimental form and literary playfulness, Don Quixote has been generally recognized as the first modern novel. The book has been enormously influential on a host of writers, 
+                                                from Fielding and Sterne to Flaubert, Dickens, Melville, and Faulkner, who reread it once a year, "just as some people read the Bible."</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> David Quint</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 7 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/dream.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">I Had That Same Dream Again</h5>
+                                            <p class="card-text genre">Fiction</p>
+                                            <p class="card-text description" style="display: none;">A layered coming-of-age story from the author of I Want to Eat Your Pancreas and At Night, I Become a Monster. 
+                                                (And don't miss the manga adaptation, also available from Seven Seas.)
+                                                <br><br>
+                                                An unhappy girl who engages in self-harm, a high schooler ostracized by her classmates, and an old woman looking to live out her twilight years in 
+                                                peace–what could three such different people have in common? That’s what grade schooler Nanoka Koyanagi is trying to find out. 
+                                                Assigned by her teacher to define what “happiness” means to her, Nanoka tries to find her place in the world by exploring her relationships with these 
+                                                three strangers, and through them, comes to know herself.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Yoru Sumino</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 8 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/gone.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Then She Was Gone</h5>
+                                            <p class="card-text genre">Thriller</p>
+                                            <p class="card-text description" style="display: none;">THEN
+                                                She was fifteen, her mother's golden girl. She had her whole life ahead of her. And then, in the blink of an eye, Ellie was gone.
+                                                <br><br>
+                                                NOW
+                                                It’s been ten years since Ellie disappeared, but Laurel has never given up hope of finding her daughter.
+                                                <br><br>
+                                                And then one day a charming and charismatic stranger called Floyd walks into a café and sweeps Laurel off her feet.
+                                                <br><br>
+                                                Before too long she’s staying the night at this house and being introduced to his nine year old daughter.
+                                                <br><br>
+                                                Poppy is precocious and pretty - and meeting her completely takes Laurel's breath away.
+                                                <br><br>
+                                                Because Poppy is the spitting image of Ellie when she was that age. And now all those unanswered questions that have haunted Laurel come flooding back.
+                                                <br><br>
+                                                What happened to Ellie? Where did she go?</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Lisa Jewell</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="carousel-item">
+                        <div class="container mb-3">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
+                                <!-- Card 9 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/human.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">No Longer Human</h5>
+                                            <p class="card-text genre">Fiction</p>
+                                            <p class="card-text description" style="display: none;">Osamu Dazai's No Longer Human, this leading postwar Japanese writer's second novel, 
+                                                tells the poignant and fascinating story of a young man who is caught between the breakup of the traditions of a northern Japanese aristocratic 
+                                                family and the impact of Western ideas. In consequence, he feels himself "disqualified from being human" (a literal translation of the Japanese title).
+                                                <br><br>
+                                                Donald Keene, who translated this and Dazai's first novel, The Setting Sun, has said of the author's work: 
+                                                "His world … suggests Chekhov or possibly postwar France, … but there is a Japanese sensibility in the choice and presentation of 
+                                                the material. A Dazai novel is at once immediately intelligible in Western terms and quite unlike any Western book." 
+                                                His writing is in some ways reminiscent of Rimbaud, while he himself has often been called a forerunner of Yukio Mishima.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Osamu Dazai</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 10 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/ikigai.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Ikigai</h5>
+                                            <p class="card-text genre">Self-help</p>
+                                            <p class="card-text description" style="display: none;">The people of Japan believe that everyone has an ikigai – 
+                                                a reason to jump out of bed each morning. And according to the residents of the Japanese island of Okinawa – 
+                                                the world’s longest-living people – finding it is the key to a longer and more fulfilled life. Inspiring and comforting, 
+                                                this book will give you the life-changing tools to uncover your personal ikigai. It will show you how to leave urgency behind, 
+                                                find your purpose, nurture friendships and throw yourself into your passions.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Hector Garcia and Francesc Miralles</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 11 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/kiki.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Kiki's Delivery Service</h5>
+                                            <p class="card-text genre">Comic</p>
+                                            <p class="card-text description" style="display: none;">Half-witch Kiki never runs from a challenge. So when her thirteenth birthday arrives, 
+                                                she's eager to follow a witch's tradition: choose a new town to call home for one year.
+                                                <br><br>
+                                                Brimming with confidence, Kiki flies to the seaside village of Koriko and expects that her powers will easily bring happiness to the 
+                                                townspeople. But gaining the trust of the locals is trickier than she expected. With her faithful, wise-cracking black cat, Jiji, by her side, 
+                                                Kiki forges new friendships and builds her inner strength, ultimately realizing that magic can be found in even the most ordinary places.
+                                                <br><br>
+                                                Blending fantasy with the charm of everyday life, this enchanting new translation will inspire both new readers and dedicated fans.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Eiko Kadono</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 12 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/milk_mocha.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title genre">Milk & Mocha</h5>
+                                            <p class="card-text">Comic</p>
+                                            <p class="card-text description" style="display: none;">Milk and Mocha share their sweet slice-of-life moments in this new collection, including five never-before-seen comics. 
+                                                Milk and Mocha are charming bears with opposite personalities. These uplifting comics remind us of the sweet moments we share with our friends, family, and loved ones.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Melani Sie</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="container mb-3">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
+                                <!-- Card 13 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/patient.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">No Longer Human</h5>
+                                            <p class="card-text genre">Fiction</p>
+                                            <p class="card-text description" style="display: none;">Osamu Dazai's No Longer Human, this leading postwar Japanese writer's second novel, 
+                                                tells the poignant and fascinating story of a young man who is caught between the breakup of the traditions of a northern Japanese aristocratic 
+                                                family and the impact of Western ideas. In consequence, he feels himself "disqualified from being human" (a literal translation of the Japanese title).
+                                                <br><br>
+                                                Donald Keene, who translated this and Dazai's first novel, The Setting Sun, has said of the author's work: 
+                                                "His world … suggests Chekhov or possibly postwar France, … but there is a Japanese sensibility in the choice and presentation of 
+                                                the material. A Dazai novel is at once immediately intelligible in Western terms and quite unlike any Western book." 
+                                                His writing is in some ways reminiscent of Rimbaud, while he himself has often been called a forerunner of Yukio Mishima.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Osamu Dazai</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 14 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/power.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">The 48 Laws of Power</h5>
+                                            <p class="card-text genre">Self-help</p>
+                                            <p class="card-text description" style="display: none;">In the book that People magazine proclaimed “beguiling” and 
+                                                “fascinating,” Robert Greene and Joost Elffers have distilled three thousand years of the history of power into 
+                                                48 essential laws by drawing from the philosophies of Machiavelli, Sun Tzu, and Carl Von Clausewitz and also from 
+                                                the lives of figures ranging from Henry Kissinger to P.T. Barnum.
+                                                <br><br>
+                                                Some laws teach the need for prudence (“Law 1: Never Outshine the Master”), others teach the value of confidence 
+                                                (“Law 28: Enter Action with Boldness”), and many recommend absolute self-preservation (“Law 15: Crush Your Enemy Totally”). 
+                                                Every law, though, has one thing in common: an interest in total domination. In a bold and arresting two-color package, 
+                                                The 48 Laws of Power is ideal whether your aim is conquest, self-defense, or simply to understand the rules of the game.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Hector Garcia and Francesc Miralles</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 15 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/Tteokbokki.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">I Want to Die But I Want to Eat Tteokbokki</h5>
+                                            <p class="card-text genre">Comic</p>
+                                            <p class="card-text description" style="display: none;">Baek Se-Hee is a successful young social media director at a 
+                                                publishing house when she begins seeing a psychiatrist about her--what to call it?--depression? She feels persistently 
+                                                low, anxious, endlessly self-doubting, but also highly judgemental of others. She hides her feelings well at work and 
+                                                with friends, adept at performing the calmness, even ease, her lifestyle demands. The effort is exhausting and overwhelming 
+                                                and keeps her from forming deep relationships. This can't be normal. But if she's so hopeless, why can she always summon 
+                                                a yen for her favourite street food, the hot, spicy rice cake, tteokbokki? Is this just what life is like? Recording her 
+                                                dialogues with her psychiatrist over a 12-week period, Baek begins to disentangle the feedback loops, knee-jerk reactions, 
+                                                and harmful behaviours that keep her locked in a cycle of self-abuse.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Eiko Kadono</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 16 -->
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <img src="images/night_circus.jpg" class="card-img-top" class="card-img-top book-image" data-toggle="modal" data-target="#bookModal" alt="Book Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title">The Night Circus</h5>
+                                            <p class="card-text genre">Fantasy</p>
+                                            <p class="card-text description" style="display: none;">The circus arrives without warning. No announcements precede it. 
+                                                It is simply there, when yesterday it was not. Within the black-and-white striped canvas tents is an utterly unique experience 
+                                                full of breathtaking amazements. It is called Le Cirque des Rêves, and it is only open at night.
+                                                <br><br>
+                                                But behind the scenes, a fierce competition is underway—a duel between two young magicians, Celia and Marco, 
+                                                who have been trained since childhood expressly for this purpose by their mercurial instructors. Unbeknownst to them, 
+                                                this is a game in which only one can be left standing, and the circus is but the stage for a remarkable battle of imagination 
+                                                and will. Despite themselves, however, Celia and Marco tumble headfirst into love—a deep, magical love that makes the lights flicker 
+                                                and the room grow warm whenever they so much as brush hands.
+                                                <br><br>
+                                                True love or not, the game must play out, and the fates of everyone involved, from the cast of extraordinary circus 
+                                                performers to the patrons, hang in the balance, suspended as precariously as the daring acrobats overhead.
+                                                <br><br>
+                                                Written in rich, seductive prose, this spell-casting novel is a feast for the senses and the heart.</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <small class="text-muted"><i class="bi bi-person-fill"></i> Melani Sie</small>
+                                            <button class="reserve-button" id="reserveButton" data-toggle="tooltip" data-placement="top" title="Reserve this book">
+                                                Reserve
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>s
+
+
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-target="#cardCarousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-target="#cardCarousel" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+
+        </div>
+
+
+
+        <div class="section">
+            <div class="chart-container">
+                <h3 class="text-center">Top 5 Favourite Genres</h3>
+                <div class="chart-content">
+                    <canvas id="libraryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <div class="inventory-container">
+                <h3 class="text-center">Inventory</h3>
+                <table id="inventoryTable" class="display" width="80%"></table>
+        
+                <footer class="footer">
+                    <div class="container">
+                        <p class="text-center">&copy; School Library Web App. All rights reserved.</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookModalLabel"><br>Book Description</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="bookModalBody">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Inventory -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <!-- For Bar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- fullPage.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+    <!-- Link to JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
